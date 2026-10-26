@@ -1,0 +1,48 @@
+[project]
+name = "quartapp"
+version = "1.0.0"
+description = "A Quart chat sample for Azure App Service and Azure OpenAI"
+requires-python = ">=3.10"
+dependencies = [
+    "quart",
+    "werkzeug>=3.1.9",
+    "gunicorn",
+    "uvicorn",
+    # Used by uvicorn on non-Windows platforms
+    "uvloop>=0.16.0; sys_platform != 'win32' and (sys_platform != 'cygwin' and platform_python_implementation != 'PyPy')",
+    # Recommended for uvicorn
+    "httptools",
+    # Used by uvicorn for reload functionality
+    "watchfiles",
+    "openai>=1.108.1",
+    "azure-identity",
+    "aiohttp>=3.14.3",
+    "python-dotenv>=1.2.2",
+    "pyyaml"
+    ]
+
+[project.urls]
+Repository = "https://github.com/microsoft/app-service-ai-sample"
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.ruff]
+lint.select = ["E", "F", "I", "UP"]
+target-version = "py310"
+line-length = 120
+
+[tool.ruff.lint.isort]
+known-first-party = ["quartapp"]
+
+[tool.black]
+target-version = ["py310"]
+line-length = 120
+
+[tool.pytest.ini_options]
+addopts = "-ra --cov"
+pythonpath = ["."]
+
+[tool.coverage.report]
+show_missing = true
